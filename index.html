@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="description" content="Anurag Gaurav - Data & Cloud Platform Engineering Leader with 16+ years of experience.">
+    <title>Anurag Gaurav | Engineering Leader</title>
+    
+    <!-- Cross-Platform Favicon Package (Relative paths for GitHub Pages) -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#010b1a">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Inter:wght@100..900&display=swap');
+
+        :root {
+            --apple-navy: #010b1a;
+            --apple-cream: #fbfbfd;
+            --apple-gold: #eab308;
+            --apple-gold-light: rgba(234, 179, 8, 0.2);
+            --apple-gray: #86868b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--apple-cream);
+            color: var(--apple-navy);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1, h2, h3, h4, .premium-font { 
+            font-family: 'Outfit', sans-serif; 
+            letter-spacing: -0.03em;
+        }
+
+        /* Performance: translate3d triggers GPU for smooth scrolling */
+        .reveal {
+            opacity: 0;
+            transform: translate3d(0, 30px, 0);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(234, 179, 8, 0.08) 0%, rgba(1, 11, 26, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .glass-nav {
+            background: rgba(251, 251, 253, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .hero-section {
+            background-color: var(--apple-navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        .bento-card:hover {
+            transform: translate3d(0, -6px, 0);
+            border-color: var(--apple-gold);
+            box-shadow: 0 30px 60px -12px rgba(234, 179, 8, 0.15);
+        }
+
+        .stat-value {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 4rem; 
+            font-size: clamp(2.5rem, 5vw, 3.5rem); 
+            font-weight: 700;
+        }
+
+        .big-year {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            color: var(--apple-navy);
+            opacity: 0.04;
+            position: absolute;
+            top: 2rem;
+            right: 2.5rem;
+            pointer-events: none;
+            z-index: 0;
+            transition: all 0.6s ease;
+            line-height: 1;
+        }
+
+        .glow-active .journey-title { color: var(--apple-gold); }
+        .glow-active .big-year { 
+            color: var(--apple-gold); 
+            opacity: 0.2; 
+            transform: translate3d(-5px, -5px, 0); 
+        }
+
+        .role-metadata {
+            color: var(--apple-gray);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        .curated-max {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .big-year { top: 1rem; right: 1.25rem; font-size: 1.75rem; }
+            section { padding-left: 1.25rem; padding-right: 1.25rem; }
+            .journey-item { padding: 2.5rem 1.25rem !important; }
+            .journey-item-content { padding-right: 2.5rem !important; }
+        }
+
+        .journey-item-content {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-yellow-200">
+
+    <div id="hero-spotlight" class="spotlight"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav" id="main-nav">
+        <div class="curated-max px-6 md:px-12 flex items-center justify-between">
+            <a href="#" class="text-base font-bold tracking-tighter premium-font">AG<span class="text-yellow-500">.</span></a>
+            
+            <div class="hidden md:flex items-center space-x-12 text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400">
+                <a href="#skills" class="hover:text-yellow-600 transition-colors">Expertise</a>
+                <a href="#experience" class="hover:text-yellow-600 transition-colors">Journey</a>
+                <a href="#education" class="hover:text-yellow-600 transition-colors">Background</a>
+            </div>
+
+            <a href="mailto:anurag.srivastavalko@gmail.com" class="text-[11px] font-bold bg-zinc-900 text-white px-5 py-2.5 rounded-full btn-premium uppercase tracking-[0.05em] hover:bg-yellow-500 hover:text-black transition-colors">Connect</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white min-h-[90vh] flex items-center pt-24">
+        <div class="curated-max px-6 md:px-12 py-12 lg:py-20 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div class="lg:col-span-7 reveal order-1">
+                    <div class="inline-flex items-center px-5 py-2 bg-white/5 border border-yellow-500/30 rounded-full mb-8">
+                        <span class="text-yellow-500 font-bold tracking-[0.2em] uppercase text-[9px] sm:text-[10px]">Engineering Leadership &mdash; 16+ Years</span>
+                    </div>
+                    <h1 class="text-5xl sm:text-6xl md:text-[7.5rem] font-bold tracking-tighter leading-[0.85] mb-8">
+                        Anurag <br> Gaurav
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-400 font-light max-w-xl leading-relaxed mb-10">
+                        Architecting <span class="text-white font-medium">Data & Cloud Platforms</span> for global enterprise estates. Building the infrastructure that powers modern business.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-5">
+                        <a href="#skills" class="bg-yellow-500 text-black px-10 py-4 rounded-full font-bold btn-premium shadow-xl shadow-yellow-500/20 text-[10px] uppercase tracking-widest text-center">View Expertise</a>
+                        <a href="mailto:anurag.srivastavalko@gmail.com" class="px-10 py-4 rounded-full font-bold border border-white/20 hover:border-yellow-500 hover:bg-white/5 transition-all text-[10px] uppercase tracking-widest text-center">Email Me</a>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-5 reveal flex justify-center lg:justify-end order-2" style="transition-delay: 0.1s;">
+                    <div class="relative group">
+                        <!-- Stronger Accent Glow around Profile -->
+                        <div class="absolute inset-0 bg-yellow-500/25 blur-[120px] rounded-full group-hover:bg-yellow-500/40 transition-all duration-700"></div>
+                        <div class="relative w-[85vw] max-w-[320px] lg:w-80 md:h-[30rem] aspect-[4/5] md:aspect-auto overflow-hidden rounded-[2.5rem] border border-yellow-500/30 profile-mask shadow-2xl transition-transform duration-700">
+                            <!-- Optimized mobile framing with object-top -->
+                            <img 
+                                src="anurrag7.png" 
+                                alt="Anurag Gaurav" 
+                                class="w-full h-full object-cover object-top brightness-95 contrast-105 group-hover:scale-105 transition-transform duration-1000"
+                                loading="eager"
+                                onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section (Gold Highlights) -->
+    <section class="py-24 bg-white">
+        <div class="curated-max px-6 md:px-12">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div class="reveal bento-card p-10 rounded-[2.5rem] text-center border-yellow-500/5">
+                    <div class="stat-value text-zinc-900">
+                        <span class="counter" data-target="16">0</span><span class="text-yellow-500 ml-0.5">+</span>
+                    </div>
+                    <p class="text-gray-400 text-[9px] font-bold uppercase tracking-[0.25em] mt-3">Years Experience</p>
+                </div>
+                <div class="reveal bento-card p-10 rounded-[2.5rem] text-center border-yellow-500/5" style="transition-delay: 0.1s;">
+                    <div class="stat-value text-zinc-900">
+                        <span class="counter" data-target="60">0</span><span class="text-yellow-500 ml-0.5">%</span>
+                    </div>
+                    <p class="text-gray-400 text-[9px] font-bold uppercase tracking-[0.25em] mt-3">SLA Improvement</p>
+                </div>
+                <div class="reveal bento-card p-10 rounded-[2.5rem] text-center border-yellow-500/5" style="transition-delay: 0.2s;">
+                    <div class="stat-value text-zinc-900">
+                        <span class="counter" data-target="2">0</span>
+                    </div>
+                    <p class="text-gray-400 text-[9px] font-bold uppercase tracking-[0.25em] mt-3">Cloud Ecosystems</p>
+                </div>
+                <div class="reveal bento-card p-10 rounded-[2.5rem] text-center border-yellow-500/5" style="transition-delay: 0.3s;">
+                    <div class="stat-value text-yellow-500">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <p class="text-gray-400 text-[9px] font-bold uppercase tracking-[0.25em] mt-3">Engineering Reach</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="skills" class="py-24 bg-zinc-50/50">
+        <div class="curated-max px-6 md:px-12">
+            <div class="flex items-end justify-between mb-16 reveal">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Expertise.</h2>
+                    <p class="text-gray-500 mt-2 max-w-sm text-sm">Reliability and data engineering platform leader.</p>
+                </div>
+                <div class="h-[1px] bg-zinc-200 flex-grow mx-16 hidden md:block opacity-40"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+                <div class="bento-card bg-white p-12 rounded-[3rem] reveal">
+                    <div class="w-14 h-14 bg-zinc-900 text-yellow-500 flex items-center justify-center rounded-2xl mb-8 shadow-xl shadow-zinc-900/10">
+                        <i class="fas fa-database text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold tracking-tight mb-4">Platform Admin</h3>
+                    <p class="text-gray-500 leading-relaxed text-sm">High-precision SQL Server tuning and complex HA/DR architectures for global estates.</p>
+                </div>
+                <div class="bento-card bg-white p-12 rounded-[3rem] reveal" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 bg-zinc-900 text-yellow-500 flex items-center justify-center rounded-2xl mb-8 shadow-xl shadow-zinc-900/10">
+                        <i class="fas fa-cloud text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold tracking-tight mb-4">Cloud Strategy</h3>
+                    <p class="text-gray-500 leading-relaxed text-sm">Strategic Azure and GCP migrations, modernizing infrastructures for the cloud era.</p>
+                </div>
+                <div class="bento-card bg-white p-12 rounded-[3rem] reveal" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 bg-zinc-900 text-yellow-500 flex items-center justify-center rounded-2xl mb-8 shadow-xl shadow-zinc-900/10">
+                        <i class="fas fa-bolt text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold tracking-tight mb-4">BI Architect</h3>
+                    <p class="text-gray-500 leading-relaxed text-sm">Delivering Power BI and Cognos solutions that empower global business intelligence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section (Symmetric Non-Overlapping Layout) -->
+    <section id="experience" class="py-24 md:py-32 bg-white">
+        <div class="curated-max px-6 md:px-12">
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tighter mb-20 reveal">Journey.</h2>
+            
+            <div class="space-y-12">
+                <!-- Role 1 -->
+                <div class="reveal group bento-card p-10 md:p-20 rounded-[3.5rem] journey-item">
+                    <div class="big-year">2025</div>
+                    <div class="max-w-3xl md:pr-32 journey-item-content">
+                        <h3 class="text-2xl md:text-4xl font-bold tracking-tight journey-title transition-colors">Principal Data & Cloud Engineer</h3>
+                        <p class="role-metadata mt-4 uppercase">UKG — Noida · Global Operations | <span class="text-yellow-600 font-bold">2014 — 2025</span></p>
+                        <p class="text-gray-500 text-base md:text-lg leading-relaxed mt-10 border-l-[1.5px] border-yellow-500/10 pl-8">
+                            Leading platform engineering for multi-continent stakeholders. Architected high-availability SQL estates and improved reporting SLAs by 60% for global business teams.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="reveal group bento-card p-10 md:p-20 rounded-[3.5rem] journey-item">
+                    <div class="big-year">2014</div>
+                    <div class="max-w-3xl md:pr-32 journey-item-content">
+                        <h3 class="text-2xl md:text-4xl font-bold tracking-tight journey-title transition-colors">Sr. Consultant, SQL DBA</h3>
+                        <p class="role-metadata mt-4 uppercase">GlobalLogic — Noida · New York | <span class="text-yellow-600 font-bold">2010 — 2014</span></p>
+                        <p class="text-gray-500 text-base md:text-lg leading-relaxed mt-10 border-l-[1.5px] border-yellow-500/10 pl-8">
+                            Executed onsite performance optimization engagements in New York, USA. Developed global frameworks for database scalability and reliability across diverse portfolios.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="reveal group bento-card p-10 md:p-20 rounded-[3.5rem] journey-item">
+                    <div class="big-year">2010</div>
+                    <div class="max-w-3xl md:pr-32 journey-item-content">
+                        <h3 class="text-2xl md:text-4xl font-bold tracking-tight journey-title transition-colors">Lead Consultant, SQL DBA</h3>
+                        <p class="role-metadata mt-4 uppercase">Symphony Services — Bangalore · USA | <span class="text-yellow-600 font-bold">2007 — 2010</span></p>
+                        <p class="text-gray-500 text-base md:text-lg leading-relaxed mt-10 border-l-[1.5px] border-yellow-500/10 pl-8">
+                            Managed high-performance OLTP environments and led deployments onsite in Boston and Philadelphia. Designed proactive monitoring and tuning frameworks.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Role 4 -->
+                <div class="reveal group bento-card p-10 md:p-20 rounded-[3.5rem] journey-item">
+                    <div class="big-year">2007</div>
+                    <div class="max-w-3xl md:pr-32 journey-item-content">
+                        <h3 class="text-2xl md:text-4xl font-bold tracking-tight journey-title transition-colors">Tech Lead, SQL DBA</h3>
+                        <p class="role-metadata mt-4 uppercase">GE Capital — UK · Switzerland · India | <span class="text-yellow-600 font-bold">2005 — 2007</span></p>
+                        <p class="text-gray-500 text-base md:text-lg leading-relaxed mt-10 border-l-[1.5px] border-yellow-500/10 pl-8">
+                            Managed global financial systems and led Disaster Recovery design and onsite implementation across the United Kingdom and Switzerland.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Background Section (Symmetric Grid) -->
+    <section id="education" class="py-24 bg-zinc-50/50">
+        <div class="curated-max px-6 md:px-12 space-y-20">
+            <div class="reveal">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter mb-12">Education.</h2>
+                <div class="bg-white p-14 rounded-[3.5rem] border border-yellow-500/5 bento-card">
+                    <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-yellow-600 mb-3">Lucknow University</p>
+                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight">Bachelor of Science: Computer Science</h3>
+                </div>
+            </div>
+
+            <div class="reveal">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter mb-12">Accreditation.</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-10 rounded-[2.5rem] border border-yellow-500/5 bento-card flex items-center gap-6">
+                        <div class="w-12 h-12 bg-zinc-900 text-yellow-500 flex items-center justify-center rounded-xl shrink-0 shadow-lg"><i class="fab fa-google"></i></div>
+                        <div>
+                            <h4 class="font-bold text-sm leading-tight">Google Cloud</h4>
+                            <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-1">Associate</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 rounded-[2.5rem] border border-yellow-500/5 bento-card flex items-center gap-6">
+                        <div class="w-12 h-12 bg-zinc-900 text-yellow-500 flex items-center justify-center rounded-xl shrink-0 shadow-lg"><i class="fab fa-microsoft"></i></div>
+                        <div>
+                            <h4 class="font-bold text-sm leading-tight">Azure 900</h4>
+                            <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-1">Certified</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 rounded-[2.5rem] border border-yellow-500/5 bento-card flex items-center gap-6">
+                        <div class="w-12 h-12 bg-zinc-900 text-yellow-500 flex items-center justify-center rounded-xl shrink-0 shadow-lg"><i class="fas fa-shield-alt"></i></div>
+                        <div>
+                            <h4 class="font-bold text-sm leading-tight">ITIL Cert</h4>
+                            <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-1">Mgmt</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 rounded-[2.5rem] border border-yellow-500/5 bento-card flex items-center gap-6">
+                        <div class="w-12 h-12 bg-zinc-900 text-yellow-500 flex items-center justify-center rounded-xl shrink-0 shadow-lg"><i class="fas fa-database"></i></div>
+                        <div>
+                            <h4 class="font-bold text-sm leading-tight">MS SQL</h4>
+                            <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-1">Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-950 text-white py-16 text-center">
+        <div class="curated-max px-6 md:px-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 border-t border-white/5 pt-10">
+                <div class="flex items-center gap-10 text-zinc-500 text-[10px] font-bold uppercase tracking-[0.2em]">
+                    <a href="mailto:anurag.srivastavalko@gmail.com" class="hover:text-yellow-500 transition-colors py-2">Email</a>
+                    <a href="https://www.linkedin.com/in/anurag-gaurav7" target="_blank" class="hover:text-yellow-500 transition-colors py-2">LinkedIn</a>
+                </div>
+                <p class="text-zinc-700 text-[9px] uppercase tracking-[0.25em]">&copy; <script>document.write(new Date().getFullYear())</script> Anurag Gaurav. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const spotlight = document.getElementById('hero-spotlight');
+        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        if (!isTouch) {
+            spotlight.style.display = 'block';
+            document.addEventListener('mousemove', (e) => {
+                requestAnimationFrame(() => {
+                    spotlight.style.left = e.clientX + 'px';
+                    spotlight.style.top = e.clientY + 'px';
+                });
+            });
+        }
+
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.counter');
+            const duration = 2000; 
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let start = null;
+                const step = (timestamp) => {
+                    if (!start) start = timestamp;
+                    const progress = Math.min((timestamp - start) / duration, 1);
+                    counter.innerText = Math.floor(progress * target);
+                    if (progress < 1) requestAnimationFrame(step);
+                    else counter.innerText = target;
+                };
+                requestAnimationFrame(step);
+            });
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.querySelector('.counter')) animateCounters();
+                }
+            });
+        }, { threshold: 0.15 });
+
+        const glowObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('glow-active');
+                else entry.target.classList.remove('glow-active');
+            });
+        }, { threshold: 0.45, rootMargin: '-10% 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('.journey-item').forEach(el => glowObserver.observe(el));
+
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                nav.style.backgroundColor = "rgba(251, 251, 253, 0.98)";
+                nav.style.boxShadow = "0 4px 20px -10px rgba(0,0,0,0.05)";
+            } else {
+                nav.style.backgroundColor = "rgba(251, 251, 253, 0.85)";
+                nav.style.boxShadow = "none";
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
